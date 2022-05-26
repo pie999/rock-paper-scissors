@@ -13,14 +13,14 @@ function playRound(playerSelection, computerSelection){
             return "You lose! Paper beats Rock";
         else return "Tie! Both players chose Rock"
     }
-    if (playerSelection == "paper"){
+    else if (playerSelection == "paper"){
         if (computerSelection == "rock")
             return "You win! paper beats rock";
         else if (computerSelection == "scissors")
             return "You lose! scissor beats paper";
         else return "Tie! Both players chose paper"
     }
-    if (playerSelection == "scissors"){
+    else if(playerSelection == "scissors"){
         if (computerSelection == "paper")
             return "You win! scissor beats paper";
         else if (computerSelection == "rock")
@@ -29,7 +29,24 @@ function playRound(playerSelection, computerSelection){
     }
 }
 
-const playerSelection = "SCISSORS";
-const computerSelection = computerPlay();
-console.log(computerSelection);
-console.log(playRound(playerSelection.toUpperCase().toLowerCase(), computerSelection));
+function game(){
+    let playerPoints = 0;
+    let computerPoints = 0;
+
+    for (let i = 0; i < 5; i++){
+        let playerSelection = prompt("Choose").toUpperCase().toLowerCase();
+        while (playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissors"){
+            playerSelection = prompt("Try again").toUpperCase().toLowerCase();
+        }
+        const computerSelection = computerPlay();
+        result = playRound(playerSelection, computerSelection);
+        if (result.slice(0,5) == "You w") playerPoints++;
+        else if (result.slice(0,5) == "You l") computerPoints++;
+        alert(result + "\nPlayer: " + playerPoints + "   Computer: " + computerPoints);
+    }
+    if (playerPoints > computerPoints) alert("YOU WON THE SET");
+    else if (playerPoints < computerPoints) alert("YOU LOST THE SET");
+    else alert("YOU TIED THE SET");
+}
+
+game();
