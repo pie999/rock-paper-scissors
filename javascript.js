@@ -29,24 +29,47 @@ function playRound(playerSelection, computerSelection){
     }
 }
 
-function game(){
-    let playerPoints = 0;
-    let computerPoints = 0;
+const container = document.querySelector(".container");
 
-    for (let i = 0; i < 5; i++){
-        let playerSelection = prompt("Choose").toUpperCase().toLowerCase();
-        while (playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissors"){
-            playerSelection = prompt("Try again").toUpperCase().toLowerCase();
-        }
-        const computerSelection = computerPlay();
-        result = playRound(playerSelection, computerSelection);
-        if (result.slice(0,5) == "You w") playerPoints++;
-        else if (result.slice(0,5) == "You l") computerPoints++;
-        alert(result + "\nPlayer: " + playerPoints + "   Computer: " + computerPoints);
-    }
-    if (playerPoints > computerPoints) alert("YOU WON THE SET");
-    else if (playerPoints < computerPoints) alert("YOU LOST THE SET");
-    else alert("YOU TIED THE SET");
-}
+const rockButton = document.querySelector(".rock");
+rockButton.addEventListener("click", () => {
+    const ann = document.createElement("p");
+    ann.textContent = playRound("rock", computerPlay());
+    container.appendChild(ann);
+    });
 
-game();
+const paperButton = document.querySelector(".paper");
+paperButton.addEventListener("click", () => {
+    const ann = document.createElement("p");
+    ann.textContent = playRound("paper", computerPlay());
+    container.appendChild(ann);
+    })
+
+const scissorsButton = document.querySelector(".scissors");
+scissorsButton.addEventListener("click", () => {
+    const ann = document.createElement("p");
+    ann.textContent = playRound("scissors", computerPlay());
+    container.appendChild(ann);
+    })
+
+// function game(){
+//     let playerPoints = 0;
+//     let computerPoints = 0;
+
+//     for (let i = 0; i < 5; i++){
+//         let playerSelection = prompt("Choose").toUpperCase().toLowerCase();
+//         while (playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissors"){
+//             playerSelection = prompt("Try again").toUpperCase().toLowerCase();
+//         }
+//         const computerSelection = computerPlay();
+//         result = playRound(playerSelection, computerSelection);
+//         if (result.slice(0,5) == "You w") playerPoints++;
+//         else if (result.slice(0,5) == "You l") computerPoints++;
+//         alert(result + "\nPlayer: " + playerPoints + "   Computer: " + computerPoints);
+//     }
+//     if (playerPoints > computerPoints) alert("YOU WON THE SET");
+//     else if (playerPoints < computerPoints) alert("YOU LOST THE SET");
+//     else alert("YOU TIED THE SET");
+// }
+
+// game();
