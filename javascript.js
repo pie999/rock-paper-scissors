@@ -21,18 +21,32 @@ function playRound (playerSelection, computerSelection){
     }
 }
 
+function checkWin(){
+    if (playerScore == 5 || computerScore == 5){
+        const ann = document.createElement("p");
+        if (playerScore == 5) ann.textContent = "YOU WON THE SET!";
+        else ann.textContent = "YOU LOST THE SET!";
+        container.appendChild(ann);
+        buttons.forEach((button) => button.removeEventListener("click", playGame));
+    }
+}
+
+function playGame(e) {
+    const ann = document.createElement("p");
+    ann.textContent = playRound(e.target.id, computerPlay());
+    container.appendChild(ann);
+    score.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
+    checkWin();
+}
+
+
+
 const container = document.querySelector(".container");
 const score = document.querySelector(".score");
 let playerScore = 0;
 let computerScore = 0;
 
 const buttons = document.querySelectorAll("button");
-buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-        const ann = document.createElement("p");
-        ann.textContent = playRound(button.id, computerPlay());
-        container.appendChild(ann);
-        score.textContent = `Player: ${playerScore} - Computer: ${computerScore}`
-    });   
-});
+buttons.forEach((button) => button.addEventListener("click", playGame));
+
 
