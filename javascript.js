@@ -21,13 +21,29 @@ function playRound (playerSelection, computerSelection){
     }
 }
 
+function resetGame (){
+    playerScore = 0;
+    computerScore = 0;
+    score.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
+    while(container.firstChild) 
+        container.removeChild(container.firstChild);
+    buttons.forEach((button) => button.addEventListener("click", playGame));
+}
+
 function checkWin(){
     if (playerScore == 5 || computerScore == 5){
         const ann = document.createElement("p");
+        ann.classList.add("bold")
         if (playerScore == 5) ann.textContent = "YOU WON THE SET!";
         else ann.textContent = "YOU LOST THE SET!";
         container.appendChild(ann);
         buttons.forEach((button) => button.removeEventListener("click", playGame));
+        
+        const playAgainButton = document.createElement("button");
+        playAgainButton.textContent = "Play Again";
+        playAgainButton.classList.add("pybutton");
+        playAgainButton.addEventListener("click", resetGame);
+        container.appendChild(playAgainButton);
     }
 }
 
